@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {Overlay, Container, Title, Advice, DividerIcon} from './styles.js'
+import {Overlay, Container, Title, Advice, DividerIcon} from './styles.js';
+//import SvgIcon from './icons/pattern-divider-mobile.svg';
 
 /*  https://api.adviceslip.com  */
 
