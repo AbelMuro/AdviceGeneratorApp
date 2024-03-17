@@ -1,24 +1,57 @@
-import React, {useEffect} from 'react';
-import {Overlay, Container, Title, Advice, DividerIcon} from './styles.js';
+import React, {useState, useEffect} from 'react';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import {Overlay, Container, Title, Advice, Button, Loading} from './styles.js';
 import { SvgXml } from 'react-native-svg';
-
-/*  https://api.adviceslip.com  */
+import icons from './icons';
 
 function App() {
+  const [advice, setAdvice] = useState('');
+  const [adviceId, setAdviceId] = useState('');
+  const [loading, setLoading] = useState(false)
 
-  let icon = `<svg width="295" height="16" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" fill-rule="evenodd"><path fill="#4F5D74" d="M0 8h122v1H0zM173 8h122v1H173z"/><g transform="translate(138)" fill="#CEE3E9"><rect width="6" height="16" rx="3"/><rect x="14" width="6" height="16" rx="3"/></g></g></svg>`
+  const handlePress = () => {
+      setLoading(true);
+      fetch('https://api.adviceslip.com/advice', {
+        cache: 'no-cache'
+      })
+      .then(res => res.json())
+      .then(data => {
+        const advice = data.slip.advice;
+        const id = data.slip.id;
+        setAdvice(advice);
+        setAdviceId(id);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log('rejected', error);
+        setLoading(false);
+      })
+  }
+
+  useEffect(() => {
+    handlePress();
+  },[])
 
   return(
       <Overlay>
             <Container>
-              <Title>Advice #117</Title>
-              <Advice>
-                  “It is easy to sit up and take notice, what's difficult is getting up and taking action.”
-              </Advice>
-            <SvgXml xml={icon} width='200px' height='100px'/>                      
+                <Title>Advice #{adviceId}</Title>
+                {loading ? 
+                  <Loading>
+                    <AnimatedCircularProgress
+                      size={50}
+                      width={7}
+                      fill={90}
+                      tintColor="#53FFAA"
+                      backgroundColor="transparent"
+                    />
+                  </Loading>
+                  : <Advice> {advice} </Advice>}
+                <SvgXml xml={icons['divider']} width='295px' height='16px'/>           
+                <Button onPress={handlePress}>
+                  <SvgXml xml={icons['dice']} width='24px' height='24px'/>    
+                </Button>           
             </Container>  
-  
       </Overlay>
     )
 }

@@ -17,6 +17,7 @@ export const Container = styled.View`
     align-items: center;
     border-radius: 10px;
     background-color: #313A48;
+    position: relative;
 `
 
 export const Title = styled.Text`
@@ -33,6 +34,7 @@ export const Title = styled.Text`
 `
 
 export const Advice = styled.Text`
+    width: 295px; 
     color: #CEE3E9;
     text-align: center;
     font-family: Manrope;
@@ -43,7 +45,25 @@ export const Advice = styled.Text`
     margin-bottom: 24px;
 `
 
-export const DividerIcon = styled.Image`
-    width: 295px;
-    height: 16px;
+export const Button = styled.Pressable`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    background-color: #53FFAA;
+    position: absolute;
+    bottom: -32px;
+    left: 50%;
+    transform: translateX(-32px);
+`
+
+export const Loading = styled.View`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 24px;
 `
