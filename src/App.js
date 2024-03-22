@@ -1,13 +1,20 @@
 import React, {useState, useEffect} from 'react';
+import {Alert, TouchableOpacity, View} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import {Overlay, Container, Title, Advice, Button, Loading} from './styles.js';
 import { SvgXml } from 'react-native-svg';
 import icons from './icons';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 function App() {
   const [advice, setAdvice] = useState('');
   const [adviceId, setAdviceId] = useState('');
   const [loading, setLoading] = useState(false)
+
+  const handleClipboard = () => {
+    Clipboard.setString(advice);
+    Alert.alert('Copied to Clipboard!');
+  }
 
   const handlePress = () => {
       setLoading(true);
@@ -35,7 +42,9 @@ function App() {
   return(
       <Overlay>
             <Container>
-                <Title>Advice #{adviceId}</Title>
+                <Title>
+                    Advice #{adviceId}
+                </Title>
                 {loading ? 
                   <Loading>
                     <AnimatedCircularProgress
@@ -46,9 +55,11 @@ function App() {
                       backgroundColor="transparent"
                     />
                   </Loading>
-                  : <Advice> {advice} </Advice>}
+                  : 
+                      <Advice onPress={handleClipboard}> {advice} </Advice>
+                    }
                 <SvgXml xml={icons['divider']} width='295px' height='16px'/>           
-                <Button onPress={handlePress}>
+                <Button>
                   <SvgXml xml={icons['dice']} width='24px' height='24px'/>    
                 </Button>           
             </Container>  
