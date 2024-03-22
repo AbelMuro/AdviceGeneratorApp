@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Alert, TouchableOpacity, View} from 'react-native';
+import {Alert} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import {Overlay, Container, Title, Advice, Button, Loading} from './styles.js';
 import { SvgXml } from 'react-native-svg';
@@ -59,7 +59,7 @@ function App() {
                       <Advice onPress={handleClipboard}> {advice} </Advice>
                     }
                 <SvgXml xml={icons['divider']} width='295px' height='16px'/>           
-                <Button>
+                <Button onPress={handlePress}>
                   <SvgXml xml={icons['dice']} width='24px' height='24px'/>    
                 </Button>           
             </Container>  
