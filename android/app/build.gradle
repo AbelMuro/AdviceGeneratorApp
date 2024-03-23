@@ -76,7 +76,7 @@ android {
 
     namespace "com.advicegeneratorapp"
     defaultConfig {
-        applicationId "com.advicegeneratorapp"
+        applicationId "com.advicegenerator"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
